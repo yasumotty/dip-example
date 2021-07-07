@@ -1,0 +1,20 @@
+version: '3.8'
+
+x-services:
+  app: &app
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+      - redis
+
+services:
+  web1:
+    <<: *app
+    build:
+      context: ../
+      dockerfile: ./hotwire-rails-web1/Dockerfile
+    command: bash -c "rm -f /app1/tmp/pids/server.pid; bundle exec rails server -p 3000 -b '0.0.0.0'"
+    container_name: hotwire-web1
+    ports:
+      - "127.0.0.1:3000:3000"

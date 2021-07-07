@@ -1,0 +1,26 @@
+version: '7.1'
+
+environment:
+  COMPOSE_EXT: development
+
+compose:
+  files:
+    - ./hotwire-rails-web1/docker-compose.yml
+    - ./hotwire-rails-web2/docker-compose.yml
+    - ./docker-compose.yml
+  project_name: horwire-rails
+
+interaction:
+  web1:
+    description: Web1 Run Rails commands
+    service: web1
+    command: bundle exec rails
+  web2:
+    description: Web2 Run Rails commands
+    service: web2
+    command: bundle exec rails
+
+provision:
+  - dip down
+  - dip build
+  - dip up
