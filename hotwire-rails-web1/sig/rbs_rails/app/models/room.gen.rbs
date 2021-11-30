@@ -1,0 +1,3 @@
+class Room < ApplicationRecord
+  def hello: (String str) -> String
+end
